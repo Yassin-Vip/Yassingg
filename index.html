@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yassin_Vip-File</title>
+<link rel="icon" href="https://cdn.imagetourls.com/uploads/tyImg/asb9XJFJ.png" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#050705;--panel:#0b120b;--line:#1c2a1c;
+    --neon:#39ff7a;--neon-2:#00e5a0;--danger:#ff3b5c;--gold:#ffd166;
+    --text:#e7ffe9;--muted:#7f9c82;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Cairo',system-ui,sans-serif;
+    background:radial-gradient(1200px 600px at 80% -10%,#0c2416 0%,transparent 60%),
+               radial-gradient(900px 500px at -10% 110%,#0a1c2a 0%,transparent 55%),
+               var(--bg);
+    color:var(--text);min-height:100vh;overflow-x:hidden;
+  }
+  a{color:var(--neon-2);text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;outline:none;background:none;color:inherit}
+  input,textarea,select{font-family:inherit;outline:none;border:none}
+  body::before{
+    content:"";position:fixed;inset:0;
+    background-image:
+      linear-gradient(rgba(57,255,122,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(57,255,122,.05) 1px,transparent 1px);
+    background-size:44px 44px;pointer-events:none;z-index:0;
+    mask-image:radial-gradient(circle at 50% 30%,#000 0%,transparent 75%);
+  }
+  .wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:22px}
+
+  /* ===== AUTH ===== */
+  .auth-shell{min-height:100vh;display:grid;place-items:center;padding:24px;position:relative;z-index:1}
+  .auth-card{
+    width:min(460px,96vw);
+    background:linear-gradient(180deg,rgba(18,30,18,.92),rgba(8,14,8,.96));
+    border:1px solid var(--line);border-radius:22px;padding:34px 28px 30px;
+    box-shadow:0 0 0 1px rgba(57,255,122,.05),0 30px 80px rgba(0,0,0,.6);
+    position:relative;overflow:hidden;animation:floatIn .7s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .auth-card::before{
+    content:"";position:absolute;inset:-1px;border-radius:22px;
+    background:conic-gradient(from 0deg,transparent,var(--neon),transparent 30%,transparent 70%,var(--neon-2),transparent);
+    opacity:.14;filter:blur(14px);z-index:-1;animation:spin 12s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes floatIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+  .brand{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:22px}
+  .brand img{width:96px;height:96px;object-fit:cover;border-radius:50%;border:2px solid rgba(57,255,122,.4);
+    box-shadow:0 0 24px rgba(57,255,122,.35),0 0 60px rgba(57,255,122,.15);animation:pulse 3.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 24px rgba(57,255,122,.35),0 0 60px rgba(57,255,122,.15)}
+    50%{box-shadow:0 0 34px rgba(57,255,122,.6),0 0 90px rgba(57,255,122,.3)}}
+  .brand h1{font-size:24px;font-weight:800;background:linear-gradient(90deg,var(--neon),var(--neon-2),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .brand p{font-size:12.5px;color:var(--muted);letter-spacing:1px}
+  .tabs{display:flex;background:#0a120a;border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:20px}
+  .tabs button{flex:1;padding:10px;border-radius:9px;color:var(--muted);font-weight:700;font-size:13.5px;transition:.25s}
+  .tabs button.active{background:linear-gradient(180deg,#152615,#0e1a0e);color:var(--neon);box-shadow:inset 0 0 0 1px rgba(57,255,122,.25)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:6px;font-weight:600}
+  .field input,.field select{width:100%;padding:13px 14px;background:#0a120a;color:var(--text);
+    border:1px solid var(--line);border-radius:11px;font-size:14px;transition:.2s}
+  .field input:focus,.field select:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(57,255,122,.12)}
+  .btn{width:100%;padding:13px;border-radius:11px;font-weight:800;font-size:14.5px;
+    background:linear-gradient(90deg,var(--neon),var(--neon-2));color:#04120a;transition:transform .15s, box-shadow .2s;
+    box-shadow:0 8px 24px rgba(57,255,122,.25);display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(57,255,122,.35)}
+  .btn.ghost{background:transparent;color:var(--neon);border:1px solid var(--neon);box-shadow:none}
+  .btn.danger{background:linear-gradient(90deg,#ff3b5c,#ff6b6b);color:#1a0308}
+  .btn.small{padding:9px 14px;width:auto;font-size:13px}
+  .msg{font-size:13px;margin-top:12px;text-align:center;min-height:18px}
+  .msg.err{color:var(--danger)}.msg.ok{color:var(--neon)}
+  .admin-box{padding:12px;border-radius:11px;background:linear-gradient(180deg,rgba(255,209,102,.08),rgba(255,209,102,.02));
+    border:1px solid rgba(255,209,102,.35);margin-bottom:14px}
+  .admin-box label{color:var(--gold);font-size:12.5px;font-weight:700}
+  .admin-box input{margin-top:6px;border-color:rgba(255,209,102,.35)!important;color:var(--gold)!important}
+  .admin-box small{display:block;color:var(--muted);font-size:11px;margin-top:6px}
+
+  /* ===== TOPBAR ===== */
+  .topbar{display:flex;align-items:center;gap:14px;padding:14px 18px;
+    background:linear-gradient(180deg,rgba(15,26,15,.95),rgba(8,14,8,.85));
+    border:1px solid var(--line);border-radius:16px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .topbar img{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(57,255,122,.5)}
+  .topbar .who{flex:1;min-width:0}
+  .topbar .who h2{font-size:15.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .who span{font-size:11.5px;color:var(--muted)}
+  .badge{font-size:10.5px;padding:4px 9px;border-radius:20px;font-weight:800;
+    background:rgba(57,255,122,.14);color:var(--neon);border:1px solid rgba(57,255,122,.35)}
+  .badge.dev{background:rgba(255,209,102,.14);color:var(--gold);border-color:rgba(255,209,102,.4)}
+  .badge.admin{background:rgba(255,107,107,.14);color:#ff6b6b;border-color:rgba(255,107,107,.4)}
+
+  .grid{display:grid;grid-template-columns:1fr;gap:20px}
+  @media(min-width:960px){.grid{grid-template-columns:280px 1fr}}
+  .side{background:linear-gradient(180deg,rgba(15,26,15,.9),rgba(8,14,8,.9));
+    border:1px solid var(--line);border-radius:16px;padding:16px;height:fit-content}
+  .side h3{font-size:12px;color:var(--muted);letter-spacing:2px;margin-bottom:10px;text-transform:uppercase}
+  .side nav button{display:block;width:100%;text-align:right;padding:11px 12px;border-radius:10px;
+    color:var(--text);font-weight:600;font-size:14px;margin-bottom:6px;transition:.2s}
+  .side nav button:hover{background:rgba(57,255,122,.07)}
+  .side nav button.active{background:linear-gradient(90deg,rgba(57,255,122,.18),transparent);color:var(--neon);box-shadow:inset 2px 0 0 var(--neon)}
+
+  .content{background:linear-gradient(180deg,rgba(15,26,15,.9),rgba(8,14,8,.9));
+    border:1px solid var(--line);border-radius:16px;padding:20px;min-height:400px}
+  .content h2{font-size:18px;margin-bottom:6px;font-weight:800}
+  .content .sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+
+  .composer{background:#0a120a;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:18px}
+  .composer textarea{width:100%;min-height:80px;background:#060c06;color:var(--text);
+    border:1px solid var(--line);border-radius:10px;padding:12px;font-size:14px;resize:vertical}
+  .composer textarea:focus{border-color:var(--neon)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center}
+  .row .grow{flex:1}
+  .file-pick{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;
+    background:#0f1a0f;border:1px dashed var(--line);color:var(--muted);font-size:13px;cursor:pointer;transition:.2s}
+  .file-pick:hover{border-color:var(--neon);color:var(--neon)}
+  .file-pick input{display:none}
+
+  .feed{display:flex;flex-direction:column;gap:14px}
+  .post{background:linear-gradient(180deg,#0e1a0e,#0a120a);border:1px solid var(--line);border-radius:14px;padding:14px;animation:floatIn .4s ease both}
+  .post .head{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+  .post .head .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--neon-2));
+    display:grid;place-items:center;color:#04120a;font-weight:900;font-size:14px}
+  .post .head .meta{flex:1;min-width:0}
+  .post .head .meta b{display:block;font-size:13.5px}
+  .post .head .meta span{font-size:11px;color:var(--muted)}
+  .post .body{font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-word;margin-bottom:10px}
+  .post img.attach{max-width:100%;border-radius:10px;border:1px solid var(--line);margin-top:6px;cursor:zoom-in}
+  .post .filelink{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:9px;
+    background:rgba(57,255,122,.08);border:1px solid rgba(57,255,122,.25);color:var(--neon-2);font-size:13px;margin-top:6px}
+  .post .actions{display:flex;gap:8px;margin-top:10px}
+  .post .actions button{color:var(--muted);font-size:12px;padding:5px 9px;border-radius:7px;transition:.2s}
+  .post .actions button:hover{background:rgba(255,59,92,.1);color:var(--danger)}
+
+  /* ===== CHAT ===== */
+  .chat-shell{display:grid;grid-template-columns:1fr;gap:14px;height:calc(100vh - 220px);min-height:520px}
+  @media(min-width:900px){.chat-shell{grid-template-columns:300px 1fr}}
+  .chat-list{background:#0a120a;border:1px solid var(--line);border-radius:14px;padding:10px;overflow-y:auto}
+  .chat-list h4{font-size:11.5px;color:var(--muted);letter-spacing:1.5px;padding:6px 8px;text-transform:uppercase}
+  .chat-item{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;cursor:pointer;transition:.2s;margin-bottom:4px}
+  .chat-item:hover{background:rgba(57,255,122,.07)}
+  .chat-item.active{background:linear-gradient(90deg,rgba(57,255,122,.18),transparent);box-shadow:inset 2px 0 0 var(--neon)}
+  .chat-item .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--neon-2));
+    display:grid;place-items:center;color:#04120a;font-weight:900;font-size:15px;flex-shrink:0;position:relative}
+  .chat-item .av .dot{position:absolute;bottom:0;left:0;width:11px;height:11px;border-radius:50%;background:var(--neon);border:2px solid #0a120a}
+  .chat-item .info{flex:1;min-width:0}
+  .chat-item .info b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .chat-item .info span{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+  .chat-item .time{font-size:10px;color:var(--muted)}
+
+  .chat-room{background:#0a120a;border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;overflow:hidden}
+  .chat-head{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:#0e1a0e}
+  .chat-head .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--neon-2));
+    display:grid;place-items:center;color:#04120a;font-weight:900;font-size:14px}
+  .chat-head .who h3{font-size:14px;font-weight:800}
+  .chat-head .who span{font-size:11px;color:var(--muted)}
+  .chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px;background:
+    linear-gradient(180deg,rgba(10,18,10,.4),rgba(6,12,6,.6))}
+  .bubble{max-width:75%;padding:9px 12px;border-radius:14px;font-size:13.5px;line-height:1.55;position:relative;word-break:break-word;animation:floatIn .25s ease both}
+  .bubble.me{align-self:flex-start;background:linear-gradient(135deg,var(--neon),var(--neon-2));color:#04120a;border-bottom-right-radius:4px}
+  .bubble.them{align-self:flex-end;background:#16241a;color:var(--text);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .bubble .when{font-size:9.5px;opacity:.7;margin-top:4px;display:block;text-align:left}
+  .bubble img{max-width:100%;border-radius:8px;margin-top:6px;cursor:zoom-in}
+  .bubble .filelink{display:inline-flex;padding:6px 10px;border-radius:8px;background:rgba(0,0,0,.25);color:inherit;font-size:12.5px;margin-top:5px}
+  .bubble .acts{display:flex;gap:4px;margin-top:4px;font-size:11px}
+  .bubble .acts button{color:inherit;opacity:.6;padding:2px 6px;border-radius:5px}
+  .bubble .acts button:hover{opacity:1;background:rgba(0,0,0,.2)}
+
+  .chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#0e1a0e;align-items:flex-end}
+  .chat-input textarea{flex:1;background:#060c06;color:var(--text);border:1px solid var(--line);border-radius:12px;
+    padding:10px 12px;font-size:14px;resize:none;max-height:120px;min-height:42px}
+  .chat-input textarea:focus{border-color:var(--neon)}
+  .chat-input .icon-btn{width:42px;height:42px;border-radius:12px;background:#0f1a0f;border:1px solid var(--line);
+    display:grid;place-items:center;color:var(--muted);transition:.2s;cursor:pointer;flex-shrink:0}
+  .chat-input .icon-btn:hover{border-color:var(--neon);color:var(--neon)}
+  .chat-input .icon-btn.send{background:linear-gradient(135deg,var(--neon),var(--neon-2));color:#04120a;border:none}
+  .chat-input .icon-btn input{display:none}
+  .empty-chat{flex:1;display:grid;place-items:center;color:var(--muted);font-size:14px}
+
+  /* ===== ADMIN PANEL ===== */
+  .userlist{display:flex;flex-direction:column;gap:8px;max-height:520px;overflow-y:auto;padding-right:4px}
+  .userlist .u{display:flex;align-items:center;gap:10px;padding:11px;border-radius:11px;
+    background:#0a120a;border:1px solid var(--line);transition:.2s}
+  .userlist .u .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--neon-2));
+    display:grid;place-items:center;color:#04120a;font-weight:900;font-size:14px}
+  .userlist .u .info{flex:1;min-width:0}
+  .userlist .u .info b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .userlist .u .info span{font-size:11px;color:var(--muted)}
+  .userlist .u .acts{display:flex;gap:6px}
+
+  /* ===== MODAL ===== */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;place-items:center;z-index:200;padding:20px}
+  .modal.open{display:grid;animation:floatIn .3s ease both}
+  .modal-card{width:min(520px,96vw);background:linear-gradient(180deg,#101a10,#0a120a);
+    border:1px solid var(--line);border-radius:18px;padding:22px;max-height:90vh;overflow-y:auto;
+    box-shadow:0 30px 80px rgba(0,0,0,.7)}
+  .modal-card h3{font-size:17px;margin-bottom:6px;font-weight:800}
+  .modal-card .sub{font-size:12px;color:var(--muted);margin-bottom:16px}
+  .perm-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;
+    background:#0a120a;border:1px solid var(--line);margin-bottom:6px;cursor:pointer;transition:.15s}
+  .perm-row:hover{border-color:var(--neon)}
+  .perm-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--neon);cursor:pointer}
+  .perm-row .ptxt{flex:1}
+  .perm-row .ptxt b{display:block;font-size:13px;font-weight:700}
+  .perm-row .ptxt small{font-size:11px;color:var(--muted)}
+
+  .empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:14px}
+  .toast{position:fixed;bottom:22px;right:22px;z-index:300;padding:12px 18px;border-radius:10px;
+    font-size:13.5px;font-weight:700;background:linear-gradient(90deg,var(--neon),var(--neon-2));color:#04120a;
+    box-shadow:0 10px 30px rgba(57,255,122,.35);transform:translateY(60px);opacity:0;transition:.35s}
+  .toast.show{transform:none;opacity:1}
+  .toast.err{background:linear-gradient(90deg,#ff3b5c,#ff6b6b);color:#1a0308;box-shadow:0 10px 30px rgba(255,59,92,.35)}
+  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;place-items:center;z-index:400;cursor:zoom-out;padding:24px}
+  .lightbox.open{display:grid}
+  .lightbox img{max-width:100%;max-height:100%;border-radius:12px;border:1px solid var(--line)}
+
+  ::-webkit-scrollbar{width:9px;height:9px}
+  ::-webkit-scrollbar-track{background:#0a120a}
+  ::-webkit-scrollbar-thumb{background:#1c2a1c;border-radius:6px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--neon)}
+</style>
+</head>
+<body>
+
+<!-- ===== AUTH ===== -->
+<div id="authView" class="auth-shell">
+  <div class="auth-card">
+    <div class="brand">
+      <img src="https://cdn.imagetourls.com/uploads/tyImg/asb9XJFJ.png" alt="Yassin_Vip" />
+      <h1>Yassin_Vip-File</h1>
+      <p>SECURE · PRIVATE · POWERED</p>
+    </div>
+
+    <div class="tabs">
+      <button id="tabLogin" class="active" onclick="switchTab('login')">تسجيل الدخول</button>
+      <button id="tabReg" onclick="switchTab('reg')">إنشاء حساب</button>
+    </div>
+
+    <div id="loginForm">
+      <div class="field"><label>البريد الإلكتروني</label><input id="loginEmail" type="email" placeholder="example@mail.com" /></div>
+      <div class="field"><label>كلمة المرور</label><input id="loginPass" type="password" placeholder="••••••••" /></div>
+      <button class="btn" onclick="doLogin()">دخول</button>
+      <div id="loginMsg" class="msg"></div>
+    </div>
+
+    <div id="regForm" style="display:none">
+      <div class="field"><label>الاسم الظاهر</label><input id="regName" type="text" placeholder="اسمك" /></div>
+      <div class="field"><label>البريد الإلكتروني</label><input id="regEmail" type="email" placeholder="example@mail.com" /></div>
+      <div class="field"><label>كلمة المرور</label><input id="regPass" type="password" placeholder="••••••••" /></div>
+      <div class="admin-box">
+        <label>🔑 كود الأدمن (اختياري)</label>
+        <input id="regAdminCode" type="text" placeholder="سيبها فاضية لو مش أدمن" />
+        <small>الحقل ده للأدمن فقط — لو معاك الكود اكتبه، ولو مش أدمن كمّل عادي.</small>
+      </div>
+      <button class="btn" onclick="doRegister()">إنشاء الحساب</button>
+      <div id="regMsg" class="msg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="appView" class="wrap" style="display:none">
+  <div class="topbar">
+    <img src="https://cdn.imagetourls.com/uploads/tyImg/asb9XJFJ.png" alt="" />
+    <div class="who">
+      <h2 id="meName">—</h2>
+      <span id="meEmail">—</span>
+    </div>
+    <span id="meBadge" class="badge">مستخدم</span>
+    <button class="btn small ghost" onclick="doLogout()">خروج</button>
+  </div>
+
+  <div class="grid">
+    <aside class="side">
+      <h3>القائمة</h3>
+      <nav>
+        <button class="active" data-tab="channel" onclick="setTab('channel')">📡 القناة</button>
+        <button data-tab="dev" onclick="setTab('dev')" id="navDev" style="display:none">⚙️ للمطورين</button>
+        <button data-tab="chats" onclick="setTab('chats')">💬 المحادثات</button>
+        <button data-tab="admin" onclick="setTab('admin')" id="navAdmin" style="display:none">🛡️ الإدارة</button>
+        <button data-tab="profile" onclick="setTab('profile')">👤 حسابي</button>
+      </nav>
+    </aside>
+
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal" id="permModal">
+  <div class="modal-card">
+    <h3 id="pmTitle">تعديل الصلاحيات</h3>
+    <div class="sub" id="pmSub"></div>
+    <div id="pmBody"></div>
+    <div class="row" style="margin-top:16px">
+      <button class="btn ghost" style="flex:1" onclick="closePermModal()">إلغاء</button>
+      <button class="btn" style="flex:1" onclick="savePerms()">حفظ</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('open')"><img id="lightImg" src="" alt="" /></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getDatabase, ref, set, get, push, onValue, remove, update }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+/* ===== CONFIG ===== */
+const firebaseConfig = {
+  apiKey: "AIzaSyBfq6Sh8jjTIzliuGcL0M4ODD65x6TMENE",
+  authDomain: "yassin-vip-file1.firebaseapp.com",
+  databaseURL: "https://yassin-vip-file1-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "yassin-vip-file1",
+  storageBucket: "yassin-vip-file1.firebasestorage.app",
+  messagingSenderId: "1048524371869",
+  appId: "1:1048524371869:web:e6be47a531a334bec0a174"
+};
+const OWNER_EMAIL = "yasynwayl527@gmail.com";
+const ADMIN_CODE  = "2027/Yassin_Vip";
+const IMGBB_KEY   = "a28892353d6ae7925382fbd16ecee4a1";
+const CATBOX_HASH = "c255b80d235f6002091127adf";
+const PROXY = "https://corsproxy.io/?url=";
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getDatabase(app);
+
+/* ===== ALL PERMISSIONS ===== */
+const PERMS = [
+  { key:"canPostChannel",   label:"النشر في القناة",       desc:"يكتب بوستات في القناة العامة" },
+  { key:"canSeeDevTab",     label:"مشاهدة تبويب المطورين",   desc:"يشوف تبويب ⚙️ للمطورين" },
+  { key:"canPostDevTab",    label:"النشر في تبويب المطورين",  desc:"ينشر في تبويب المطورين" },
+  { key:"receiveUserMsgs",  label:"استقبال رسائل المستخدمين", desc:"المستخدمين يقدروا يبعتوله شات" },
+  { key:"replyChats",       label:"الرد على المحادثات",       desc:"يرد في المحادثات" },
+  { key:"deleteAnyPost",    label:"حذف أي بوست",             desc:"يمسح بوستات أي حد في القناة" },
+  { key:"deleteAnyMessage", label:"حذف أي رسالة",            desc:"يمسح رسائل أي حد في المحادثات" },
+  { key:"manageUsers",      label:"إدارة المستخدمين",         desc:"يعدّل رتب وصلاحيات المستخدمين" }
+];
+
+const ROLES = {
+  user:  { label:"مستخدم",           color:"",       icon:"" },
+  admin: { label:"أدمن",             color:"admin",  icon:"🛡️" },
+  dev:   { label:"مطوّر مساعد",      color:"dev",    icon:"⚙️" },
+  owner: { label:"المطوّر",          color:"dev",    icon:"👑" }
+};
+
+/* ===== STATE ===== */
+let me = null;
+let currentTab = "channel";
+let allUsers = {};
+let unsubFeed = null;
+let unsubChatRoom = null;
+let activeChatUid = null;
+let editingPostKey = null;
+let permTargetUid = null;
+
+/* ===== HELPERS ===== */
+window.toast = (msg, err=false) => {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "toast show" + (err ? " err" : "");
+  clearTimeout(window.__tt);
+  window.__tt = setTimeout(() => t.className = "toast", 3200);
+};
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const initial = s => (String(s||"?").trim()[0] || "?").toUpperCase();
+const fmtTime = ts => {
+  if(!ts) return "";
+  const d = new Date(ts), now = new Date(), diff = (now-d)/1000;
+  if(diff<60) return "الآن";
+  if(diff<3600) return Math.floor(diff/60)+" د";
+  if(diff<86400) return Math.floor(diff/3600)+" س";
+  return d.toLocaleDateString("ar-EG");
+};
+const isOwner = email => email && email.toLowerCase() === OWNER_EMAIL;
+const hasPerm = (u, key) => {
+  if(!u) return false;
+  if(u.isOwner) return true;
+  return !!(u.perms && u.perms[key]);
+};
+
+/* ===== TAB SWITCH (AUTH) ===== */
+window.switchTab = which => {
+  const login = which==="login";
+  document.getElementById("tabLogin").classList.toggle("active", login);
+  document.getElementById("tabReg").classList.toggle("active", !login);
+  document.getElementById("loginForm").style.display = login?"":"none";
+  document.getElementById("regForm").style.display   = login?"none":"";
+};
+
+/* ===== REGISTER ===== */
+window.doRegister = async () => {
+  const name = document.getElementById("regName").value.trim();
+  const email = document.getElementById("regEmail").value.trim();
+  const pass = document.getElementById("regPass").value;
+  const code = document.getElementById("regAdminCode").value.trim();
+  const msg = document.getElementById("regMsg");
+  msg.className = "msg err";
+  if(!name||!email||!pass){ msg.textContent="اكمل كل الحقول"; return; }
+  if(pass.length<6){ msg.textContent="كلمة المرور 6 حروف على الأقل"; return; }
+
+  const owner = isOwner(email);
+  const adminCodeOk = code === ADMIN_CODE;
+  const role = owner ? "owner" : (adminCodeOk ? "admin" : "user");
+
+  msg.className="msg"; msg.textContent="بيتم الإنشاء...";
+  try{
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    await set(ref(db,"users/"+cred.user.uid), {
+      uid: cred.user.uid, name, email, role,
+      perms: {},
+      createdAt: Date.now()
+    });
+    msg.className="msg ok";
+    msg.textContent = owner ? "تم إنشاء حساب المطوّر 👑" : adminCodeOk ? "تم إنشاء حساب أدمن 🛡️" : "تم إنشاء الحساب ✅";
+    toast(owner ? "أهلاً بيك يا مطوّر" : "أهلاً بيك " + name);
+  }catch(e){
+    msg.className="msg err";
+    msg.textContent = e.code==="auth/email-already-in-use" ? "الإيميل مستخدم بالفعل" :
+                      e.code==="auth/invalid-email" ? "إيميل غير صالح" : e.message;
+  }
+};
+
+/* ===== LOGIN ===== */
+window.doLogin = async () => {
+  const email = document.getElementById("loginEmail").value.trim();
+  const pass = document.getElementById("loginPass").value;
+  const msg = document.getElementById("loginMsg");
+  msg.className="msg err";
+  if(!email||!pass){ msg.textContent="اكمل كل الحقول"; return; }
+  msg.className="msg"; msg.textContent="بيتم التحقق...";
+  try{
+    await signInWithEmailAndPassword(auth, email, pass);
+    msg.className="msg ok"; msg.textContent="تم الدخول";
+  }catch(e){
+    msg.className="msg err";
+    msg.textContent = e.code==="auth/invalid-credential" ? "بيانات غلط" :
+                      e.code==="auth/user-not-found" ? "الحساب مش موجود" : e.message;
+  }
+};
+
+window.doLogout = async () => {
+  if(unsubFeed){ unsubFeed(); unsubFeed=null; }
+  if(unsubChatRoom){ unsubChatRoom(); unsubChatRoom=null; }
+  await signOut(auth);
+  location.reload();
+};
+
+/* ===== AUTH STATE ===== */
+onAuthStateChanged(auth, async user => {
+  if(!user){
+    document.getElementById("authView").style.display="";
+    document.getElementById("appView").style.display="none";
+    me=null; return;
+  }
+  const uid = user.uid, email = user.email;
+  const snap = await get(ref(db,"users/"+uid));
+  let profile;
+  if(snap.exists()){ profile = snap.val(); }
+  else {
+    profile = {
+      uid, name: email.split("@")[0], email,
+      role: isOwner(email)?"owner":"user", perms:{}, createdAt:Date.now()
+    };
+    await set(ref(db,"users/"+uid), profile);
+  }
+  const owner = isOwner(email);
+  me = {
+    uid, email,
+    name: profile.name,
+    role: owner ? "owner" : (profile.role || "user"),
+    isOwner: owner,
+    perms: profile.perms || {}
+  };
+
+  document.getElementById("authView").style.display="none";
+  document.getElementById("appView").style.display="";
+  document.getElementById("meName").textContent = me.name;
+  document.getElementById("meEmail").textContent = me.email;
+
+  const badge = document.getElementById("meBadge");
+  const r = ROLES[me.role] || ROLES.user;
+  badge.textContent = (r.icon ? r.icon + " " : "") + r.label;
+  badge.className = "badge " + (r.color || "");
+
+  document.getElementById("navDev").style.display = hasPerm(me,"canSeeDevTab") ? "" : "none";
+  document.getElementById("navAdmin").style.display = me.isOwner ? "" : "none";
+
+  setTab("channel");
+});
+
+/* ===== TABS ===== */
+window.setTab = name => {
+  currentTab = name;
+  document.querySelectorAll(".side nav button").forEach(b => b.classList.toggle("active", b.dataset.tab===name));
+  if(unsubFeed){ unsubFeed(); unsubFeed=null; }
+  if(unsubChatRoom){ unsubChatRoom(); unsubChatRoom=null; }
+  if(name==="channel") renderChannel();
+  if(name==="dev")     renderDevTab();
+  if(name==="chats")   renderChats();
+  if(name==="admin")   renderAdmin();
+  if(name==="profile") renderProfile();
+};
+
+/* ===== UPLOAD (via proxy) ===== */
+async function uploadImage(file){
+  const fd = new FormData(); fd.append("image", file);
+  const target = "https://api.imgbb.com/1/upload?key=" + IMGBB_KEY;
+  const res = await fetch(PROXY + encodeURIComponent(target), { method:"POST", body:fd });
+  const j = await res.json();
+  if(!j.success) throw new Error("ImgBB failed: " + (j.error?.message || "unknown"));
+  return { url: j.data.url, thumb: j.data.thumb?.url || j.data.url };
+}
+async function uploadFile(file){
+  const fd = new FormData();
+  fd.append("reqtype","fileupload");
+  fd.append("userhash", CATBOX_HASH);
+  fd.append("fileToUpload", file);
+  const target = "https://catbox.moe/user/api.php";
+  const res = await fetch(PROXY + encodeURIComponent(target), { method:"POST", body:fd });
+  const url = (await res.text()).trim();
+  if(!url.startsWith("http")) throw new Error("Catbox: " + url);
+  return { url, name:file.name, size:file.size };
+}
+
+/* ===== COMPOSER ===== */
+function composerHTML(id, canSend){
+  return `
+    <div class="composer">
+      <textarea id="${id}_text" placeholder="اكتب رسالتك..."></textarea>
+      <div class="row">
+        <label class="file-pick">🖼️ صورة<input type="file" accept="image/*" id="${id}_img" /></label>
+        <label class="file-pick">📎 ملف<input type="file" id="${id}_file" /></label>
+        <span class="grow"></span>
+        ${canSend ? `<button class="btn small" id="${id}_send">إرسال 🚀</button>` : `<span style="color:var(--muted);font-size:12.5px">مش عندك صلاحية النشر</span>`}
+      </div>
+      <div id="${id}_status" class="msg" style="text-align:right"></div>
+    </div>`;
+}
+
+async function sendPost(category, { textId, imgId, fileId, statusId }){
+  const text = document.getElementById(textId).value.trim();
+  const imgEl = document.getElementById(imgId), fileEl = document.getElementById(fileId);
+  const status = document.getElementById(statusId);
+  const imgFile = imgEl.files[0], fileFile = fileEl.files[0];
+  if(!text && !imgFile && !fileFile){ status.className="msg err"; status.textContent="اكتب حاجة أو اختار ملف"; return; }
+  status.className="msg"; status.textContent="بيتم الإرسال...";
+  let image=null, fileData=null;
+  try{
+    if(imgFile) image = await uploadImage(imgFile);
+    if(fileFile) fileData = await uploadFile(fileFile);
+  }catch(e){
+    status.className="msg err"; status.textContent="فشل الرفع: "+e.message; return;
+  }
+  await push(ref(db,"feed"), {
+    category, text, image, file:fileData,
+    from: { uid: me.uid, name: me.name, email: me.email, role: me.role },
+    createdAt: Date.now()
+  });
+  document.getElementById(textId).value=""; imgEl.value=""; fileEl.value="";
+  status.className="msg ok"; status.textContent="تم الإرسال ✅";
+  toast("تم النشر");
+}
+
+/* ===== CHANNEL ===== */
+function renderChannel(){
+  const c = document.getElementById("content");
+  const canPost = hasPerm(me,"canPostChannel");
+  c.innerHTML = `
+    <h2>📡 القناة العامة</h2>
+    <div class="sub">الرسايل العامة لكل المستخدمين.</div>
+    ${composerHTML("ch", canPost)}
+    <div class="feed" id="feed"></div>
+  `;
+  if(canPost){
+    document.getElementById("ch_send").onclick = () => sendPost("channel", {
+      textId:"ch_text", imgId:"ch_img", fileId:"ch_file", statusId:"ch_status"
+    });
+  }
+  unsubFeed = onValue(ref(db,"feed"), snap => {
+    const feed = document.getElementById("feed");
+    if(!snap.exists()){ feed.innerHTML = `<div class="empty">لا يوجد منشورات بعد</div>`; return; }
+    const items = [];
+    snap.forEach(ch => { const v = ch.val(); if(v.category === "channel") items.push({ key: ch.key, ...v }); });
+    items.sort((a,b)=>b.createdAt-a.createdAt);
+    if(!items.length){ feed.innerHTML = `<div class="empty">لا يوجد منشورات بعد</div>`; return; }
+    feed.innerHTML = items.map(p => postHTML(p,"channel")).join("");
+    bindPostActions(feed,"channel");
+  });
+}
+
+/* ===== DEV TAB ===== */
+function renderDevTab(){
+  const c = document.getElementById("content");
+  const canPost = hasPerm(me,"canPostDevTab");
+  c.innerHTML = `
+    <h2>⚙️ للمطورين</h2>
+    <div class="sub">رسايل المطورين فقط. المستخدم العادي مش بيشوفها.</div>
+    ${composerHTML("dev", canPost)}
+    <div class="feed" id="feed"></div>
+  `;
+  if(canPost){
+    document.getElementById("dev_send").onclick = () => sendPost("dev", {
+      textId:"dev_text", imgId:"dev_img", fileId:"dev_file", statusId:"dev_status"
+    });
+  }
+  unsubFeed = onValue(ref(db,"feed"), snap => {
+    const feed = document.getElementById("feed");
+    if(!snap.exists()){ feed.innerHTML = `<div class="empty">لا يوجد منشورات بعد</div>`; return; }
+    const items = [];
+    snap.forEach(ch => { const v = ch.val(); if(v.category === "dev") items.push({ key: ch.key, ...v }); });
+    items.sort((a,b)=>b.createdAt-a.createdAt);
+    if(!items.length){ feed.innerHTML = `<div class="empty">لا يوجد منشورات بعد</div>`; return; }
+    feed.innerHTML = items.map(p => postHTML(p,"dev")).join("");
+    bindPostActions(feed,"dev");
+  });
+}
+
+function postHTML(p, cat){
+  const r = ROLES[p.from?.role] || ROLES.user;
+  const canDel = me.isOwner || hasPerm(me,"deleteAnyPost") || p.from?.uid === me.uid;
+  const canEdit = p.from?.uid === me.uid;
+  return `
+    <div class="post" data-key="${p.key}">
+      <div class="head">
+        <div class="av">${esc(initial(p.from?.name))}</div>
+        <div class="meta">
+          <b>${esc(p.from?.name||"?")} <span class="badge ${r.color}" style="margin-right:6px">${r.icon} ${r.label}</span></b>
+          <span>${fmtTime(p.createdAt)}</span>
+        </div>
+      </div>
+      ${p.text ? `<div class="body" data-body>${esc(p.text)}</div>` : ""}
+      ${p.image ? `<img class="attach" src="${esc(p.image.url)}" />` : ""}
+      ${p.file ? `<a class="filelink" href="${esc(p.file.url)}" target="_blank">📎 ${esc(p.file.name)} (${(p.file.size/1024).toFixed(0)} KB)</a>` : ""}
+      <div class="actions">
+        ${canEdit ? `<button data-edit>✏️ تعديل</button>` : ""}
+        ${canDel ? `<button data-del>🗑 حذف</button>` : ""}
+      </div>
+    </div>`;
+}
+
+function bindPostActions(container, cat){
+  container.querySelectorAll("img.attach").forEach(img => {
+    img.onclick = () => { document.getElementById("lightImg").src=img.src; document.getElementById("lightbox").classList.add("open"); };
+  });
+  container.querySelectorAll(".post").forEach(post => {
+    const key = post.dataset.key;
+    const delBtn = post.querySelector("[data-del]");
+    const editBtn = post.querySelector("[data-edit]");
+    if(delBtn) delBtn.onclick = async () => {
+      if(!confirm("متأكد من الحذف؟")) return;
+      await remove(ref(db,"feed/"+key));
+      toast("تم الحذف");
+    };
+    if(editBtn) editBtn.onclick = () => {
+      const body = post.querySelector("[data-body]");
+      if(!body) return;
+      if(editingPostKey === key){
+        const newText = body.textContent.trim();
+        update(ref(db,"feed/"+key), { text:newText }).then(()=>toast("تم التعديل"));
+        editingPostKey = null;
+      } else {
+        editingPostKey = key;
+        body.setAttribute("contenteditable","true");
+        body.style.outline = "1px dashed var(--neon)";
+        body.style.padding = "8px";
+        body.style.borderRadius = "8px";
+        body.focus();
+        editBtn.textContent = "💾 حفظ";
+      }
+    };
+  });
+}
+
+/* ===== CHATS ===== */
+async function renderChats(){
+  const c = document.getElementById("content");
+  c.innerHTML = `
+    <h2>💬 المحادثات</h2>
+    <div class="sub">تواصل مباشر — كل رسالة محفوظة.</div>
+    <div class="chat-shell">
+      <div class="chat-list" id="chatList"></div>
+      <div class="chat-room" id="chatRoom">
+        <div class="empty-chat">اختر محادثة للبدء</div>
+      </div>
+    </div>
+  `;
+
+  const usnap = await get(ref(db,"users"));
+  allUsers = {};
+  if(usnap.exists()) usnap.forEach(ch => allUsers[ch.key] = ch.val());
+
+  const list = document.getElementById("chatList");
+  const contacts = [];
+
+  if(me.isOwner){
+    Object.values(allUsers).forEach(u => { if(u.uid !== me.uid) contacts.push(u); });
+  } else {
+    Object.values(allUsers).forEach(u => {
+      if(u.uid === me.uid) return;
+      const isRecv = u.role === "owner" || u.perms?.receiveUserMsgs;
+      if(isRecv) contacts.push(u);
+    });
+  }
+
+  if(!contacts.length){
+    list.innerHTML = `<div class="empty">لا يوجد محادثات</div>`;
+    return;
+  }
+
+  const lastSnap = await get(ref(db,"chatsByUser/"+me.uid));
+  const lastMap = {};
+  if(lastSnap.exists()) lastSnap.forEach(ch => lastMap[ch.key] = ch.val());
+
+  contacts.sort((a,b) => (lastMap[b.uid]?.lastAt||0) - (lastMap[a.uid]?.lastAt||0));
+
+  list.innerHTML = contacts.map(u => {
+    const r = ROLES[u.role] || ROLES.user;
+    const last = lastMap[u.uid]?.lastText || "لا يوجد رسائل";
+    const lastAt = lastMap[u.uid]?.lastAt ? fmtTime(lastMap[u.uid].lastAt) : "";
+    return `
+      <div class="chat-item" data-uid="${u.uid}" onclick="openChat('${u.uid}')">
+        <div class="av">${esc(initial(u.name))}</div>
+        <div class="info">
+          <b>${esc(u.name)} ${r.icon}</b>
+          <span>${esc(last)}</span>
+        </div>
+        <div class="time">${lastAt}</div>
+      </div>`;
+  }).join("");
+}
+
+window.openChat = async uid => {
+  activeChatUid = uid;
+  document.querySelectorAll(".chat-item").forEach(el => el.classList.toggle("active", el.dataset.uid===uid));
+  const target = allUsers[uid];
+  if(!target) return;
+  const r = ROLES[target.role] || ROLES.user;
+  const canSend = me.isOwner || hasPerm(me,"replyChats") || me.uid === uid;
+
+  const room = document.getElementById("chatRoom");
+  room.innerHTML = `
+    <div class="chat-head">
+      <div class="av">${esc(initial(target.name))}</div>
+      <div class="who">
+        <h3>${esc(target.name)} <span class="badge ${r.color}">${r.icon} ${r.label}</span></h3>
+        <span>${esc(target.email)}</span>
+      </div>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-input">
+      <label class="icon-btn">🖼️<input type="file" accept="image/*" id="ci_img" /></label>
+      <label class="icon-btn">📎<input type="file" id="ci_file" /></label>
+      <textarea id="ci_text" placeholder="اكتب رسالة..." rows="1"></textarea>
+      <button class="icon-btn send" id="ci_send">🚀</button>
+    </div>
+  `;
+
+  document.getElementById("ci_send").onclick = () => sendChat(target);
+  document.getElementById("ci_text").addEventListener("keydown", e => {
+    if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); sendChat(target); }
+  });
+  document.getElementById("ci_text").addEventListener("input", e => {
+    e.target.style.height = "auto";
+    e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
+  });
+
+  if(unsubChatRoom){ unsubChatRoom(); unsubChatRoom=null; }
+  const key = chatKey(me.uid, uid);
+  unsubChatRoom = onValue(ref(db,"chats/"+key+"/messages"), snap => {
+    const body = document.getElementById("chatBody");
+    if(!snap.exists()){ body.innerHTML = `<div class="empty-chat" style="font-size:13px">لا يوجد رسائل — ابدأ الكلام</div>`; return; }
+    const msgs = [];
+    snap.forEach(ch => msgs.push({ key: ch.key, ...ch.val() }));
+    msgs.sort((a,b)=>a.createdAt-b.createdAt);
+    body.innerHTML = msgs.map(m => bubbleHTML(m,target)).join("");
+    body.scrollTop = body.scrollHeight;
+    body.querySelectorAll("img").forEach(img => {
+      img.onclick = () => { document.getElementById("lightImg").src=img.src; document.getElementById("lightbox").classList.add("open"); };
+    });
+    body.querySelectorAll("[data-delmsg]").forEach(b => {
+      b.onclick = async () => {
+        if(!confirm("حذف الرسالة؟")) return;
+        await remove(ref(db,"chats/"+key+"/messages/"+b.dataset.delmsg));
+      };
+    });
+    body.querySelectorAll("[data-editmsg]").forEach(b => {
+      b.onclick = () => startEditMsg(key, b.dataset.editmsg);
+    });
+  });
+
+  if(!canSend){
+    document.querySelector(".chat-input").style.display = "none";
+  }
+};
+
+function bubbleHTML(m, target){
+  const mine = m.from?.uid === me.uid;
+  const canDel = mine || me.isOwner || hasPerm(me,"deleteAnyMessage");
+  const canEdit = mine;
+  return `
+    <div class="bubble ${mine?"me":"them"}">
+      ${m.text ? `<div>${esc(m.text)}</div>` : ""}
+      ${m.image ? `<img src="${esc(m.image.url)}" />` : ""}
+      ${m.file ? `<a class="filelink" href="${esc(m.file.url)}" target="_blank">📎 ${esc(m.file.name)}</a>` : ""}
+      <span class="when">${fmtTime(m.createdAt)}</span>
+      <div class="acts">
+        ${canEdit ? `<button data-editmsg="${m.key}">✏️</button>` : ""}
+        ${canDel ? `<button data-delmsg="${m.key}">🗑</button>` : ""}
+      </div>
+    </div>`;
+}
+
+async function startEditMsg(chatKeyStr, msgKey){
+  const cur = prompt("عدّل الرسالة:");
+  if(cur === null) return;
+  await update(ref(db,"chats/"+chatKeyStr+"/messages/"+msgKey), { text: cur.trim() });
+  toast("تم التعديل");
+}
+
+async function sendChat(target){
+  const textEl = document.getElementById("ci_text");
+  const imgEl = document.getElementById("ci_img");
+  const fileEl = document.getElementById("ci_file");
+  const text = textEl.value.trim();
+  const imgFile = imgEl.files[0], fileFile = fileEl.files[0];
+  if(!text && !imgFile && !fileFile) return;
+
+  let image=null, fileData=null;
+  try{
+    if(imgFile) image = await uploadImage(imgFile);
+    if(fileFile) fileData = await uploadFile(fileFile);
+  }catch(e){ toast("فشل الرفع: "+e.message, true); return; }
+
+  const key = chatKey(me.uid, target.uid);
+  const msg = {
+    text, image, file:fileData,
+    from:{ uid: me.uid, name: me.name, email: me.email, role: me.role },
+    createdAt: Date.now()
+  };
+  await push(ref(db,"chats/"+key+"/messages"), msg);
+
+  const preview = text || (image ? "[صورة]" : "[ملف]");
+  await update(ref(db,"chatsByUser/"+me.uid+"/"+target.uid), { lastText: preview, lastAt: Date.now(), otherUid: target.uid });
+  await update(ref(db,"chatsByUser/"+target.uid+"/"+me.uid), { lastText: preview, lastAt: Date.now(), otherUid: me.uid });
+
+  textEl.value = ""; imgEl.value=""; fileEl.value="";
+  textEl.style.height = "auto";
+}
+
+const chatKey = (a,b) => [a,b].sort().join("__");
+
+/* ===== ADMIN PANEL ===== */
+async function renderAdmin(){
+  const c = document.getElementById("content");
+  c.innerHTML = `
+    <h2>🛡️ الإدارة</h2>
+    <div class="sub">إدارة كل المستخدمين والصلاحيات.</div>
+    <div class="userlist" id="userList"></div>
+  `;
+  const snap = await get(ref(db,"users"));
+  const list = document.getElementById("userList");
+  if(!snap.exists()){ list.innerHTML = `<div class="empty">مفيش مستخدمين</div>`; return; }
+  const users = [];
+  snap.forEach(ch => users.push({ key: ch.key, ...ch.val() }));
+  users.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  list.innerHTML = users.map(u => {
+    const r = ROLES[u.role] || ROLES.user;
+    const permCount = Object.values(u.perms||{}).filter(Boolean).length;
+    return `
+      <div class="u">
+        <div class="av">${esc(initial(u.name))}</div>
+        <div class="info">
+          <b>${esc(u.name)} <span class="badge ${r.color}">${r.icon} ${r.label}</span></b>
+          <span>${esc(u.email)} · ${permCount} صلاحية</span>
+        </div>
+        <div class="acts">
+          <button class="btn small ghost" onclick="openPermModal('${u.uid}')">⚙️ الصلاحيات</button>
+        </div>
+      </div>`;
+  }).join("");
+}
+
+window.openPermModal = async uid => {
+  permTargetUid = uid;
+  const u = allUsers[uid] || (await get(ref(db,"users/"+uid))).val();
+  allUsers[uid] = u;
+  document.getElementById("pmTitle").textContent = "صلاحيات: " + u.name;
+  document.getElementById("pmSub").textContent = u.email;
+
+  let body = `
+    <div class="field">
+      <label>الرتبة</label>
+      <select id="pmRole" style="width:100%;padding:12px;background:#0a120a;color:var(--text);border:1px solid var(--line);border-radius:10px">
+        <option value="user"  ${u.role==="user"?"selected":""}>مستخدم</option>
+        <option value="admin" ${u.role==="admin"?"selected":""}>أدمن 🛡️</option>
+        <option value="dev"   ${u.role==="dev"?"selected":""}>مطوّر مساعد ⚙️</option>
+      </select>
+    </div>
+    <div style="margin:14px 0 8px;font-size:12px;color:var(--muted);letter-spacing:1.5px">الصلاحيات</div>
+  `;
+  PERMS.forEach(p => {
+    const checked = u.perms?.[p.key] ? "checked" : "";
+    body += `
+      <label class="perm-row">
+        <input type="checkbox" data-perm="${p.key}" ${checked} />
+        <div class="ptxt">
+          <b>${p.label}</b>
+          <small>${p.desc}</small>
+        </div>
+      </label>`;
+  });
+  document.getElementById("pmBody").innerHTML = body;
+  document.getElementById("permModal").classList.add("open");
+};
+
+window.closePermModal = () => {
+  document.getElementById("permModal").classList.remove("open");
+  permTargetUid = null;
+};
+
+window.savePerms = async () => {
+  if(!permTargetUid) return;
+  const role = document.getElementById("pmRole").value;
+  const perms = {};
+  document.querySelectorAll("#pmBody input[data-perm]").forEach(cb => {
+    perms[cb.dataset.perm] = cb.checked;
+  });
+  await update(ref(db,"users/"+permTargetUid), { role, perms });
+  toast("تم الحفظ");
+  closePermModal();
+  renderAdmin();
+};
+
+/* ===== PROFILE ===== */
+function renderProfile(){
+  const c = document.getElementById("content");
+  const r = ROLES[me.role] || ROLES.user;
+  const permList = me.isOwner ? PERMS.map(p=>p.label) : PERMS.filter(p=>me.perms?.[p.key]).map(p=>p.label);
+  c.innerHTML = `
+    <h2>👤 حسابي</h2>
+    <div class="sub">بياناتك الأساسية.</div>
+    <div class="composer">
+      <div class="field"><label>الاسم الظاهر</label><input id="pName" value="${esc(me.name)}" /></div>
+      <div class="field"><label>البريد</label><input value="${esc(me.email)}" disabled /></div>
+      <div class="field"><label>الرتبة</label><input value="${r.icon} ${r.label}" disabled /></div>
+      <div class="field"><label>الصلاحيات</label><div style="font-size:13px;color:var(--muted);padding:8px;background:#0a120a;border:1px solid var(--line);border-radius:10px">${permList.length ? permList.map(esc).join(" · ") : "لا يوجد"}</div></div>
+      <button class="btn" id="pSave">حفظ</button>
+    </div>
+  `;
+  document.getElementById("pSave").onclick = async () => {
+    const name = document.getElementById("pName").value.trim();
+    if(!name) return toast("اكتب اسم", true);
+    await update(ref(db,"users/"+me.uid), { name });
+    me.name = name;
+    document.getElementById("meName").textContent = name;
+    toast("تم الحفظ");
+  };
+}
+</script>
+</body>
+</html>
